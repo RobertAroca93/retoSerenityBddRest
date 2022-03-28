@@ -1,6 +1,6 @@
 package co.com.sofka.tasks;
 
-import co.com.sofka.model.create.CreateUser;
+import co.com.sofka.model.create.CreateUserReqres;
 import io.restassured.http.ContentType;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.rest.interactions.Post;
 public class PostCreate implements Task {
 
     private String resource;
-    private CreateUser create;
+    private CreateUserReqres create;
 
 
 
@@ -18,7 +18,8 @@ public class PostCreate implements Task {
         actor.attemptsTo(
                 Post.to(resource)
                         .with(
-                                requestSpecification -> requestSpecification.relaxedHTTPSValidation().contentType(ContentType.JSON)
+                                requestSpecification -> requestSpecification.relaxedHTTPSValidation()
+                                        .contentType(ContentType.JSON)
                                         .body(create)
                         )
         );
@@ -30,7 +31,7 @@ public class PostCreate implements Task {
         return this;
     }
 
-    public PostCreate withBodyRequest (CreateUser create) {
+    public PostCreate withBodyRequest (CreateUserReqres create) {
         this.create = create;
         return this;
     }
